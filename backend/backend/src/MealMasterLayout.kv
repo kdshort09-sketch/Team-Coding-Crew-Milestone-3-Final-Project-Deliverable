@@ -1,0 +1,382 @@
+#:import MDCheckbox kivymd.uix.selectioncontrol.MDCheckbox
+#:import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
+
+MDScreenManager:
+    LoginScreen:
+    DashboardScreen:
+    RecipesScreen:
+    AddRecipeScreen:
+    PantryScreen:
+    SettingsScreen:
+
+
+# LOGIN SCREEN
+
+<LoginScreen>:
+    name: "login"
+    md_bg_color: 0.15, 0.17, 0.2, 1
+
+    MDFloatLayout:
+        MDCard:
+            orientation: "vertical"
+            size_hint: 0.85, 0.65
+            pos_hint: {"center_x": 0.5, "center_y": 0.55}
+            radius: [25, 25, 25, 25]
+            elevation: 8
+            md_bg_color: 0.82, 0.9, 0.91, 1
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: "12dp"
+                padding: "20dp"
+
+                MDLabel:
+                    text: "MealMaster"
+                    halign: "center"
+                    font_style: "H4"
+                    bold: True
+
+                MDTextField:
+                    id: username
+                    hint_text: "Username"
+                    icon_left: "account"
+                    mode: "rectangle"
+
+                MDTextField:
+                    id: password
+                    hint_text: "Password"
+                    icon_left: "lock"
+                    password: True
+                    mode: "rectangle"
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    spacing: "10dp"
+
+                    MDCheckbox:
+                        id: stay_signed_in
+
+                    MDLabel:
+                        text: "Stay Signed In"
+                        halign: "left"
+
+                MDRaisedButton:
+                    text: "Log In"
+                    md_bg_color: 0.2, 0.3, 0.35, 1
+                    on_release: root.login_user()
+
+                MDFlatButton:
+                    text: "Create Account"
+                    on_release: print("Create account clicked")
+
+
+# DASHBOARD SCREEN
+
+<DashboardScreen>:
+    name: "dashboard"
+    md_bg_color: 0.15, 0.17, 0.2, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+        spacing: "7dp"
+
+        MDCard:
+            size_hint_y: None
+            height: "150dp"
+            radius: [12, 12, 12, 12]
+            md_bg_color: 0.82, 0.9, 0.91, 1
+            padding: "10dp"
+            MDLabel:
+                text: "Recipe of the Day"
+                bold: True
+            MDLabel:
+                text: root.dayRecipe()
+                theme_text_color: "Secondary"
+
+#Weekly Meal Overview Feature
+        MDCard:
+            size_hint_y: None
+            height: "130dp"
+            radius: [12, 12, 12, 12]
+            md_bg_color: 0.82, 0.9, 0.91, 1
+            padding: "10dp"
+            MDLabel:
+                text: "Weekly Meal Overview"
+                bold: True
+            MDLabel:
+                text: "SUN MON TUE WED THU FRI SAT\nBreakfast | Lunch | Dinner" #I think that this will have to be
+                theme_text_color: "Secondary"                                   #changed to suit kivy's ui, if needed
+
+#Shopping List Feature
+        MDCard:
+            size_hint_y: None
+            height: "130dp"
+            radius: [12, 12, 12, 12]
+            md_bg_color: 0.82, 0.9, 0.91, 1
+            padding: "10dp"
+            MDLabel:
+                text: "Active Shopping List"
+                bold: True
+            MDLabel:
+                text: "• Item 1\n• Item 2\n• Item 3"
+
+#Nutritional Insights Feature
+        MDCard:
+            size_hint_y: None
+            height: "130dp"
+            radius: [12, 12, 12, 12]
+            md_bg_color: 0.82, 0.9, 0.91, 1
+            padding: "10dp"
+            MDLabel:
+                text: "Nutritional Insights"
+                bold: True
+            MDLabel:                        #doesn't nutrition change for some dishes
+                text: "Daily nutrition % "  #when cooked? don't know how this would work
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: "5dp"
+            spacing: "5dp"
+            md_bg_color: 0.1, 0.12, 0.15, 1
+
+            #Dashboaard Button
+            MDFlatButton:
+                text: "Dashboard"
+                text_color: 0, 1, 0, 1
+                on_release: app.root.current = "dashboard"
+
+            #Recipes button
+            MDFlatButton:
+                text: "Recipes"
+                on_release: app.root.current = "recipes"
+
+            #Pantry button
+            MDFlatButton:
+                text: "Pantry"
+                on_release: app.root.current = "pantry"
+
+            #Settings button
+            MDFlatButton:
+                text: "Settings"
+                on_release: app.root.current = "settings"
+
+
+# RECIPES SCREEN
+
+
+<RecipesScreen>:
+    name: "recipes"
+    md_bg_color: 0.15, 0.17, 0.2, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+        spacing: "5dp"
+
+        MDLabel:
+            text: "Recipes"
+            halign: "center"
+            font_style: "H5"
+            bold: True
+
+    #Add Recipe Button
+        MDRaisedButton:
+            text: "Add New Recipe"
+            size_hint_y: None
+            height: "40dp"
+            md_bg_color: 0.2, 0.3, 0.35, 1
+            on_release: app.root.current = "add_recipe"
+
+        MDCard:
+            radius: [12, 12, 12, 12]
+            md_bg_color: 0.82, 0.9, 0.91, 1
+            padding: "8dp"
+            MDLabel:
+                text: "Recipe list ..."
+                theme_text_color: "Secondary"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: "5dp"
+            spacing: "5dp"
+            md_bg_color: 0.1, 0.12, 0.15, 1
+
+            MDFlatButton:
+                text: "Dashboard"
+                on_release: app.root.current = "dashboard"
+
+            MDFlatButton:
+                text: "Recipes"
+                text_color: 0, 1, 0, 1
+                on_release: app.root.current = "recipes"
+
+            MDFlatButton:
+                text: "Pantry"
+                on_release: app.root.current = "pantry"
+
+            MDFlatButton:
+                text: "Settings"
+                on_release: app.root.current = "settings"
+
+
+# ADD RECIPE SCREEN
+
+<AddRecipeScreen>:
+    name: "add_recipe"
+    md_bg_color: 0.15, 0.17, 0.2, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+        spacing: "10dp"
+
+        MDLabel:
+            text: "Add New Recipe"
+            halign: "center"
+            font_style: "H5"
+            bold: True
+
+        MDTextField:
+            id: recipe_title
+            hint_text: "Recipe Title"
+            mode: "rectangle"
+
+        MDTextField:
+            id: recipe_steps
+            hint_text: "Steps to create recipe"
+            mode: "rectangle"
+            multiline: True
+            size_hint_y: 0.5
+
+#Save Recipe Button
+        MDRaisedButton:
+            text: "Save Recipe"
+            md_bg_color: 0.2, 0.3, 0.35, 1
+            on_release: root.saveRecipe()
+
+#Back to Recipes Button
+        MDFlatButton:
+            text: "Back to Recipes"
+            on_release: app.root.current = "recipes"
+
+
+# PANTRY SCREEN
+
+
+<PantryScreen>:
+    name: "pantry"
+    md_bg_color: 0.15, 0.17, 0.2, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+
+        MDLabel:
+            text: "Pantry"
+            halign: "center"
+            font_style: "H5"
+            bold: True
+
+        MDCard:
+            radius: [12, 12, 12, 12]
+            md_bg_color: 0.82, 0.9, 0.91, 1
+            padding: "10dp"
+            MDLabel:
+                text: "Pantry items ..."
+                theme_text_color: "Secondary"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: "5dp"
+            md_bg_color: 0.1, 0.12, 0.15, 1
+
+            MDFlatButton:
+                text: "Dashboard"
+                on_release: app.root.current = "dashboard"
+
+            MDFlatButton:
+                text: "Recipes"
+                on_release: app.root.current = "recipes"
+
+            MDFlatButton:
+                text: "Pantry"
+                text_color: 0, 1, 0, 1
+                on_release: app.root.current = "pantry"
+
+            MDFlatButton:
+                text: "Settings"
+                on_release: app.root.current = "settings"
+
+
+
+# SETTINGS SCREEN
+
+<SettingsScreen>:
+    name: "settings"
+    md_bg_color: 0.15, 0.17, 0.2, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "15dp"
+        padding: "20dp"
+
+        MDLabel:
+            text: "Settings"
+            halign: "center"
+            font_style: "H5"
+            bold: True
+
+        MDRaisedButton:
+            text: "Edit Profile"
+
+        MDRaisedButton:
+            text: "Language"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "50dp"
+            spacing: "15dp"
+
+            MDLabel:
+                text: "Notifications"
+                halign: "left"
+                size_hint_x: .7
+
+            MDSwitch:
+                id: notif_switch
+                on_active: app.toggle_notifications(self.active)
+
+        MDRaisedButton:
+            text: "Dark Mode"
+
+        MDRaisedButton:
+            text: "Log Out"
+            on_release: app.root.current = "login"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: "5dp"
+            md_bg_color: 0.1, 0.12, 0.15, 1
+
+            MDFlatButton:
+                text: "Dashboard"
+                on_release: app.root.current = "dashboard"
+
+            MDFlatButton:
+                text: "Recipes"
+                on_release: app.root.current = "recipes"
+
+            MDFlatButton:
+                text: "Pantry"
+                on_release: app.root.current = "pantry"
+
+            MDFlatButton:
+                text: "Settings"
+                text_color: 0, 1, 0, 1
+                on_release: app.root.current = "settings"
