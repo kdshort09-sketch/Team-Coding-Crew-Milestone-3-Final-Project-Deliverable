@@ -1,1 +1,11 @@
-{}
+{
+  "Spaghetti Bolognese": {
+    "dish_steps": "1. Brown ground beef.\n2. Add tomato sauce and simmer.\n3. Boil spaghetti.\n4. Combine and serve."
+  },
+  "Chicken Stir Fry": {
+    "dish_steps": "1. Slice chicken and vegetables.\n2. Stir fry chicken until cooked.\n3. Add vegetables and sauce.\n4. Cook 5 minutes and serve over rice."
+  },
+  "Pancakes": {
+    "dish_steps": "1. Mix flour, milk, egg, and sugar.\n2. Pour batter into pan.\n3. Flip when bubbles form.\n4. Serve with syrup."
+  }
+}
